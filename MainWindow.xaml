@@ -1,0 +1,74 @@
+﻿<Window x:Class="A_star_alg.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:A_star_alg"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#2C3E50" Padding="10">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="btn_start" Content="Start" Width="80" Height="30" Margin="5" 
+                        Background="#3498DB" Foreground="White" BorderThickness="0" Click="btn_start_Click"/>
+                <Button x:Name="btn_end" Content="End" Width="80" Height="30" Margin="5" 
+                        Background="#E74C3C" Foreground="White" BorderThickness="0" Click="btn_end_Click"/>
+                <Button x:Name="btn_wall" Content="Wall" Width="80" Height="30" Margin="5" 
+                        Background="#34495E" Foreground="White" BorderThickness="0" Click="btn_wall_Click"/>
+                <Button x:Name="btn_clear" Content="Clear" Width="80" Height="30" Margin="5" 
+                        Background="#95A5A6" Foreground="White" BorderThickness="0" Click="btn_clear_Click"/>
+                <Button x:Name="btn_find_path" Content="Find Path" Width="80" Height="30" Margin="5" 
+                        Background="#27AE60" Foreground="White" BorderThickness="0" Click="btn_find_path_Click"/>
+                <Separator VerticalAlignment="Center" Height="28" Width="50" Background="#2C3E50"/>
+                <TextBlock Margin="5" Text="Grid resolution: " VerticalAlignment="Center" Foreground="White"/>
+                <TextBox x:Name="x_axes" BorderThickness="0" Foreground="White" Margin="5" 
+                         Height="30" Width="40" Background="Gray" Text="30" VerticalContentAlignment="Center" 
+                         HorizontalContentAlignment="Center" LostFocus="textbox_text_changed"
+                         PreviewTextInput="numeric_textbox_preview_text_input" />
+                <TextBlock Text="X" VerticalAlignment="Center" Margin="2" Foreground="LightGray"/>
+                <TextBox x:Name="y_axes" BorderThickness="0" Foreground="White" Margin="5" 
+                         Height="30" Width="40" Background="Gray" Text="30" VerticalContentAlignment="Center" 
+                         HorizontalContentAlignment="Center" LostFocus="textbox_text_changed" 
+                         PreviewTextInput="numeric_textbox_preview_text_input"/>
+                <Button x:Name="btn_set_grid" Content="Set grid" Width="80" Height="30" Margin="5" 
+                        Background="MediumPurple" Foreground="White" BorderThickness="0" Click="btn_set_grid_Click"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Background="#ECF0F1" Margin="10">
+            <ScrollViewer x:Name="canvas_scroll_viewer" 
+                  HorizontalScrollBarVisibility="Auto" 
+                  VerticalScrollBarVisibility="Auto">
+                <Canvas x:Name="grid_canvas" Background="White" 
+                    MouseLeftButtonDown="grid_canvas_MouseLeftButtonDown"
+                    MouseMove="grid_canvas_MouseMove"
+                    MouseLeftButtonUp="grid_canvas_MouseLeftButtonUp"
+                    MouseRightButtonDown="grid_canvas_MouseRightButtonDown"
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    ScrollViewer.CanContentScroll="True"/>
+            </ScrollViewer>
+        </Border>
+
+        <StatusBar Grid.Row="2" Background="#34495E">
+            <StatusBarItem HorizontalAlignment="Left">
+                <CheckBox x:Name="checkbox_animate" Content="Animate" 
+              VerticalAlignment="Center" Foreground="White" Margin="10,0,0,0"/>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Path Length: " Foreground="White"/>
+                    <TextBlock x:Name="path_length_text" Text="0" Foreground="#3498DB" FontWeight="Bold"/>
+                    <TextBlock Text=" | Nodes Explored: " Foreground="White" Margin="10,0,0,0"/>
+                    <TextBlock x:Name="nodes_explored_text" Text="0" Foreground="#E74C3C" FontWeight="Bold"/>
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
